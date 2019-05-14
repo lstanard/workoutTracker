@@ -5,6 +5,7 @@ import {
   createBottomTabNavigator
 } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
+import colors from '../assets/styles/colors';
 import Home from '../screens/Home';
 import AddWorkout from '../screens/AddWorkout';
 
@@ -42,8 +43,8 @@ const TabNavigator = createBottomTabNavigator(
         getTabBarIcon(navigation, focused, tintColor),
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: '#000',
+      activeTintColor: colors.brightRed,
+      inactiveTintColor: colors.darkGray,
     }
   }
 );
