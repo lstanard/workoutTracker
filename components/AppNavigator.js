@@ -1,4 +1,10 @@
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import React from 'react';
+import {
+  createAppContainer, 
+  createStackNavigator, 
+  createBottomTabNavigator
+} from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 import Home from '../screens/Home';
 import AddWorkout from '../screens/AddWorkout';
 
@@ -12,6 +18,36 @@ const AppNavigator = createStackNavigator(
   }
 );
 
-const AppContainer = createAppContainer(AppNavigator);
+const getTabBarIcon = (navigation, focused, tintColor) => {
+  const { routeName } = navigation.state;
+  let IconComponent = Ionicons;
+  let iconName;
+  if (routeName === 'Home') {
+    iconName = `ios-home`;
+  } else if (routeName === 'AddWorkout') {
+    iconName = `ios-fitness`;
+  }
+
+  return <IconComponent name={iconName} size={25} color={tintColor} />;
+}
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    Home: Home,
+    AddWorkout: AddWorkout
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) =>
+        getTabBarIcon(navigation, focused, tintColor),
+    }),
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: '#000',
+    }
+  }
+);
+
+const AppContainer = createAppContainer(TabNavigator);
 
 export default AppContainer;
