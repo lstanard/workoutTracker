@@ -9,12 +9,14 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const {navigate} = this.props.navigation;
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>This is the Home screen.</Text>
         <Button
           title="Add a Workout"
-          onPress={() => this.props.navigation.navigate('AddWorkout')} />
+          onPress={() => navigate('AddWorkout', {name: 'Charlie'})} />
       </View>
     );
   }
