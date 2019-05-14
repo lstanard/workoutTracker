@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
+import styles from '../assets/styles/global';
 
 export default class AddWorkout extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -13,7 +14,7 @@ export default class AddWorkout extends React.Component {
     const name = navigation.getParam('name', 'Guest');
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.container}>
         <Text>Add a New Workout</Text>
         <Text>User: {JSON.stringify(name)}</Text>
         <Button 
