@@ -1,25 +1,26 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Alert } from 'react-native';
 import styles from '../assets/styles/global';
+import Button from '../components/Button/Button';
 
 export default class AddWorkout extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Add a Workout'
+      title: 'Start Workout'
     }
   }
 
-  render() {
-    const {navigation} = this.props;
-    const name = navigation.getParam('name', 'Guest');
+  showAlert = () => {
+    // Alert.alert('Title', 'Message');
+  }
 
+  render() {
     return (
       <View style={styles.container}>
-        <Text>Add a New Workout</Text>
-        <Text>User: {JSON.stringify(name)}</Text>
         <Button 
-          title="Add Another Workout"
-          onPress={() => this.props.navigation.push('AddWorkout')} />
+          action={this.showAlert}
+          icon='ios-add-circle-outline'
+          label="Add New Workout" />
       </View>
     );
   }
