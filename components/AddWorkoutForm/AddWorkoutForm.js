@@ -10,9 +10,7 @@ const formStyles = {
   textbox: {
     normal: {
       ...Form.stylesheet.textbox.normal,
-      backgroundColor: '#fff',
-      borderWidth: 0,
-      borderRadius: 0
+      ...styles.formInput
     }
   }
 };
