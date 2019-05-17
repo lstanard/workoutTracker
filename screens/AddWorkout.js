@@ -1,27 +1,22 @@
 import React from 'react';
-import { View, Alert } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import styles from '../assets/styles/global';
-import Button from '../components/Button/Button';
+import AddWorkoutForm from '../components/AddWorkoutForm/AddWorkoutForm';
 
 export default class AddWorkout extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Start Workout'
+      title: 'Add New Workout'
     }
-  }
-
-  showAlert = () => {
-    // Alert.alert('Title', 'Message');
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Button 
-          action={this.showAlert}
-          icon='ios-add-circle-outline'
-          label="Add New Workout" />
-      </View>
+      <ScrollView style={styles.scrollViewContainer}>
+        <View style={styles.container}>
+          <AddWorkoutForm />
+        </View>
+      </ScrollView>
     );
   }
 }
