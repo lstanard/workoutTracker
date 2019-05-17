@@ -5,16 +5,16 @@ import styles from '../assets/styles/global';
 import Button from '../components/Button/Button';
 
 const WorkoutsList = (props) => {
-    return (
-      <View style={{borderWidth: 1, borderColor: 'red'}}>
-        {props.workouts.map((item, index) => (
-          <Text key={index}>
-            {item.title}: {item.notes}
-          </Text>
-        ))}
-      </View>
-    )
-  }
+  return (
+    <View>
+      {props.workouts.map((item, index) => (
+        <Text key={index}>
+          {item.title}: {item.notes}
+        </Text>
+      ))}
+    </View>
+  )
+}
 
 class MyWorkouts extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -31,6 +31,10 @@ class MyWorkouts extends React.Component {
           icon='ios-add-circle-outline'
           label="Add New Workout" />
         <View style={{ padding: 30 }}>
+          <Text
+            style={{fontSize: 24}}>
+            Recent Workouts
+          </Text>
           <WorkoutsList
             workouts={this.props.workouts} />
         </View>
