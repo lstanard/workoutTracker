@@ -1,6 +1,10 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
+import { connect } from 'react-redux';
 import t from 'tcomb-form-native';
+import {
+  addWorkout
+} from '../../actions';
 import styles from './styles';
 
 const Form = t.form.Form;
@@ -24,10 +28,15 @@ const Workout = t.struct({
   notes: t.String
 });
 
-export default class AddWorkoutForm extends React.Component {
+class AddWorkoutForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit = () => {
     const value = this._form.getValue();
-    console.log(value);
+    this.props.addWorkout(value);
   }
 
   render() {
@@ -45,3 +54,13 @@ export default class AddWorkoutForm extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addWorkout: (data) => {
+      dispatch(addWorkout(data))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddWorkoutForm);

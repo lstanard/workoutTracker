@@ -1,9 +1,22 @@
 import React from 'react';
-import { View, Alert } from 'react-native';
+import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import styles from '../assets/styles/global';
 import Button from '../components/Button/Button';
 
-export default class MyWorkouts extends React.Component {
+const WorkoutsList = (props) => {
+    return (
+      <View style={{borderWidth: 1, borderColor: 'red'}}>
+        {props.workouts.map((item, index) => (
+          <Text key={index}>
+            {item.title}: {item.notes}
+          </Text>
+        ))}
+      </View>
+    )
+  }
+
+class MyWorkouts extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'My Workouts'
@@ -17,7 +30,18 @@ export default class MyWorkouts extends React.Component {
           action={() => this.props.navigation.navigate('AddWorkout')}
           icon='ios-add-circle-outline'
           label="Add New Workout" />
+        <View style={{ padding: 30 }}>
+          <WorkoutsList
+            workouts={this.props.workouts} />
+        </View>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { workouts } = state;
+  return { workouts }
+}
+
+export default connect(mapStateToProps)(MyWorkouts);
