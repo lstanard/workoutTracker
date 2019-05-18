@@ -1,20 +1,23 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../assets/styles/global';
 
-export default class Home extends React.Component {
+export default class Exercises extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Home'
+      title: 'Exercises'
     }
   }
+
+  // Pull exercise data from file (for now)
+  // Render FlatList to display
 
   render() {
     const {navigate} = this.props.navigation;
 
     return (
       <View style={styles.container}>
-        <Text>This is the Home screen.</Text>
+        <Text>This will display a list of available exercises.</Text>
       </View>
     );
   }

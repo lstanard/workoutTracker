@@ -9,6 +9,13 @@ import colors from '../assets/styles/colors';
 import Home from '../screens/Home';
 import MyWorkouts from '../screens/MyWorkouts';
 import AddWorkout from '../screens/AddWorkout';
+import Exercises from '../screens/Exercises';
+
+const tabLabels = {
+  Home: 'Home',
+  MyWorkouts: 'My Workouts',
+  Exercises: 'Exercises'
+}
 
 const WorkoutNavigator = createStackNavigator(
   {
@@ -19,11 +26,15 @@ const WorkoutNavigator = createStackNavigator(
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
   const { routeName } = navigation.state;
+
   let IconComponent = Ionicons;
   let iconName;
-  if (routeName === 'Home') {
+
+  if (routeName === tabLabels.Home) {
     iconName = `ios-home`;
-  } else if (routeName === 'My Workouts') {
+  } else if (routeName === tabLabels.MyWorkouts) {
+    iconName = `ios-body`;
+  } else if (routeName === tabLabels.Exercises) {
     iconName = `ios-fitness`;
   }
 
@@ -32,12 +43,15 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: {
+    [tabLabels.Home]: {
       screen: Home
     },
-    'My Workouts': {
+    [tabLabels.MyWorkouts]: {
       screen: WorkoutNavigator
     },
+    [tabLabels.Exercises]: {
+      screen: Exercises
+    }
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -48,7 +62,7 @@ const TabNavigator = createBottomTabNavigator(
       activeTintColor: colors.brightRed,
       inactiveTintColor: colors.darkGray,
     },
-    initialRouteName: 'My Workouts'
+    initialRouteName: tabLabels.MyWorkouts
   }
 );
 
