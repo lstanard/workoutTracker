@@ -28,7 +28,6 @@ class MyWorkouts extends React.Component {
       <View style={styles.container}>
         <Button 
           action={() => this.props.navigation.navigate('AddWorkout')}
-          icon='ios-add-circle-outline'
           label="Add New Workout" />
         <View style={{ padding: 30 }}>
           <Text

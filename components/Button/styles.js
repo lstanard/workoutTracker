@@ -6,13 +6,13 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     borderRadius: 3,
-    paddingVertical: 12,
-    paddingHorizontal: 18,
+    paddingVertical: 10,
+    paddingHorizontal: 22,
+    height: 55
   },
   label: {
     color: '#fff',
     fontSize: 18,
-    paddingTop: 1,
   },
   icon: {
     marginRight: 10,

@@ -1,24 +1,26 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import colors from '../../assets/styles/colors';
 
 export default function Button(props) {
-  const { icon, label, action, background } = props;
+  const { icon, label, action, background, size } = props;
 
   const backgroundColor = {
     backgroundColor: background ? background : colors.brightRed
   }
 
   return (
-    <TouchableOpacity
+    <TouchableHighlight
       onPress={action}
       style={[styles.button, backgroundColor]}>
-      {icon && <Ionicons name={icon} size={25} color='#fff' style={styles.icon} />}
-      <Text style={styles.label}>
-        {label}
-      </Text>
-    </TouchableOpacity>
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        {icon && <Ionicons name={icon} size={25} color='#fff' style={styles.icon} />}
+        <Text style={styles.label}>
+          {label}
+        </Text>
+      </View>
+    </TouchableHighlight>
   )
 }

@@ -11,5 +11,12 @@ export default StyleSheet.create({
   scrollViewContainer: {
     backgroundColor: colors.gray,
     flexGrow: 1
+  },
+  textInput: {
+    backgroundColor: '#fff',
+    borderWidth: 0,
+    borderRadius: 0,
+    padding: 12,
+    height: 45
   }
 });
