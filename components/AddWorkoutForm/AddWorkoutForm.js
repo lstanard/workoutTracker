@@ -90,9 +90,7 @@ class AddWorkoutForm extends React.Component {
 
   handleExerciseRemove(exercise) {
     let currentWorkout = Object.assign({}, this.state.currentWorkout);
-    currentWorkout.exercises = currentWorkout.exercises.filter((item) => {
-      return item !== exercise;
-    });
+    currentWorkout.exercises = currentWorkout.exercises.filter((item) => item !== exercise );
     this.setState({currentWorkout});
   }
 
