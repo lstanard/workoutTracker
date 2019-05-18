@@ -21,8 +21,8 @@ class AddExerciseModal extends React.Component {
   }
 
   handleAdd() {
-    // console.log(this.state.text);
-    // TODO: Send value to store - need currentWorkout object
+    this.props.handleAdd(this.state.text);
+    this.props.handleClose();
   }
 
   componentWillReceiveProps(nextProps) {
