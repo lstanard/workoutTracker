@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import colors from '../../assets/styles/colors';
 
+// TODO: Rename to AppButton
 export default function Button(props) {
   const { icon, label, action, background, size } = props;
 

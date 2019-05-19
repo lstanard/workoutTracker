@@ -4,4 +4,5 @@ export default colors = {
   darkGray:   '#353b48', // blue nights
   brightRed:  '#e84118', // nasturcian flower
   brightBlue: '#00a8ff', // protoss pylon
+  blue:       '#273c75', // mazarine blue
 }

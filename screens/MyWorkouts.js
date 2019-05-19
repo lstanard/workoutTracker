@@ -1,16 +1,40 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import styles from '../assets/styles/global';
+import globalStyles from '../assets/styles/global';
 import Button from '../components/Button/Button';
+import styles from '../assets/styles/screens/MyWorkouts';
+import colors from '../assets/styles/colors';
 
 const WorkoutsList = (props) => {
   return (
-    <View>
-      {props.workouts.map((item, index) => (
-        <Text key={index}>
-          {item.title}: {item.notes}
+    <View style={{
+      alignSelf: 'stretch',
+      marginTop: 30}}>
+      <View style={{
+        marginBottom: 15,
+        paddingBottom: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: colors.medGray}}>
+        <Text style={{
+          fontSize: 24}}>
+          Recent Workouts
         </Text>
+      </View>
+      {props.workouts.map((item, index) => (
+        <TouchableOpacity key={index}>
+          <View 
+            style={styles.workoutCard}>
+            <Text style={styles.workoutCardTitle}>
+              {item.title}
+            </Text>
+            {item.exercises.map((exercise, index) => (
+              <View key={index}>
+                <Text>{exercise}</Text>
+              </View>
+            ))}
+          </View>
+        </TouchableOpacity>
       ))}
     </View>
   )
@@ -24,19 +48,23 @@ class MyWorkouts extends React.Component {
   }
 
   render() {
+    const containerStyles = {
+      ...globalStyles.container,
+      ...styles.container,
+    };
+
     return (
-      <View style={styles.container}>
+      <View style={containerStyles}>
+        <Text style={{
+          fontSize: 32,
+          fontWeight: 'bold'}}>
+          My Workouts
+        </Text>
         <Button 
           action={() => this.props.navigation.navigate('AddWorkout')}
-          label="Add New Workout" />
-        <View style={{ padding: 30 }}>
-          <Text
-            style={{fontSize: 24}}>
-            Recent Workouts
-          </Text>
-          <WorkoutsList
-            workouts={this.props.workouts} />
-        </View>
+          label="Start Workout" />
+        <WorkoutsList
+          workouts={this.props.workouts} />
       </View>
     );
   }

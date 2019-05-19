@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import t from 'tcomb-form-native';
 import {
   addWorkout
 } from '../../actions';
@@ -11,27 +10,7 @@ import styles from './styles';
 import colors from '../../assets/styles/colors';
 
 import AddExerciseModal from '../AddExerciseModal/AddExerciseModal';
-
-const Form = t.form.Form;
-
-const formStyles = {
-  ...Form.stylesheet,
-  textbox: {
-    normal: {
-      ...Form.stylesheet.textbox.normal,
-      ...globalStyles.textInput
-    }
-  }
-};
-
-const options = {
-  stylesheet: formStyles
-};
-
-const Workout = t.struct({
-  title: t.String,
-  notes: t.String,
-});
+import { TextInput } from 'react-native-gesture-handler';
 
 class ExerciseList extends React.Component {
   render () {
@@ -62,7 +41,7 @@ class AddWorkoutForm extends React.Component {
     this.state = {
       modalVisible: false,
       currentWorkout: {
-        title: '',
+        title: 'Name',
         notes: '',
         exercises: [
           'Bench Press',
@@ -74,6 +53,8 @@ class AddWorkoutForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleNotesChange = this.handleNotesChange.bind(this);
     this.handleExerciseAdd = this.handleExerciseAdd.bind(this);
     this.handleExerciseRemove = this.handleExerciseRemove.bind(this);
   }
@@ -83,20 +64,43 @@ class AddWorkoutForm extends React.Component {
   }
 
   handleExerciseAdd(exercise) {
-    let currentWorkout = Object.assign({}, this.state.currentWorkout);
-    currentWorkout.exercises.push(exercise);
-    this.setState({currentWorkout});
+    let exercises = this.state.currentWorkout.exercises;
+    exercises.push(exercise);
+    this.setState(prevState => ({
+      currentWorkout: {
+        ...prevState.currentWorkout,
+        exercises
+      }
+    }));
   }
 
   handleExerciseRemove(exercise) {
+    let exercises = this.state.currentWorkout.exercises;
+    exercises = exercises.filter((item) => item !== exercise );
+    this.setState(prevState => ({
+      currentWorkout: {
+        ...prevState.currentWorkout,
+        exercises
+      }
+    }));
+  }
+
+  handleTitleChange(title) {
     let currentWorkout = Object.assign({}, this.state.currentWorkout);
-    currentWorkout.exercises = currentWorkout.exercises.filter((item) => item !== exercise );
+    currentWorkout.title = title;
+    this.setState({currentWorkout});
+  }
+
+  handleNotesChange(notes) {
+    let currentWorkout = Object.assign({}, this.state.currentWorkout);
+    currentWorkout.notes = notes;
     this.setState({currentWorkout});
   }
 
   handleSubmit = () => {
-    const value = this._form.getValue();
-    this.props.addWorkout(value);
+    const currentWorkout = Object.assign({}, this.state.currentWorkout);
+    this.props.addWorkout(currentWorkout);
+    this.props.navigation.goBack();
   }
 
   addExercise = () => {
@@ -105,11 +109,19 @@ class AddWorkoutForm extends React.Component {
 
   render() {
     return (
-      <View style={{ padding: 30, alignSelf: 'stretch' }}>
-        <Form 
-          ref={c => this._form = c}
-          options={options}
-          type={Workout} />
+      <View style={{
+        padding: 30, 
+        paddingTop: 0, 
+        alignSelf: 'stretch' }}>
+        <TextInput
+          autoFocus={true}
+          style={globalStyles.textInput}
+          onChangeText={this.handleTitleChange}
+          value={this.state.currentWorkout.title} />
+        <TextInput
+          style={globalStyles.textInput}
+          onChangeText={this.handleNotesChange}
+          value={this.state.currentWorkout.notes} />
         <View style={{ marginBottom: 10 }}>
           {this.state.currentWorkout.exercises.length > 0
             ? <ExerciseList

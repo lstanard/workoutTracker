@@ -11,6 +11,7 @@ import MyWorkouts from '../screens/MyWorkouts';
 import AddWorkout from '../screens/AddWorkout';
 import Exercises from '../screens/Exercises';
 
+// move to separate module
 const tabLabels = {
   Home: 'Home',
   MyWorkouts: 'My Workouts',
@@ -21,6 +22,12 @@ const WorkoutNavigator = createStackNavigator(
   {
     MyWorkouts: { screen: MyWorkouts },
     AddWorkout: { screen: AddWorkout },
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
   }
 );
 
