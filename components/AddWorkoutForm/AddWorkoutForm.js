@@ -50,20 +50,13 @@ class AddWorkoutForm extends React.Component {
         ]
       }
     }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.setModalVisible = this.setModalVisible.bind(this);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleNotesChange = this.handleNotesChange.bind(this);
-    this.handleExerciseAdd = this.handleExerciseAdd.bind(this);
-    this.handleExerciseRemove = this.handleExerciseRemove.bind(this);
   }
 
-  setModalVisible(visible) {
+  setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
   }
 
-  handleExerciseAdd(exercise) {
+  handleExerciseAdd = (exercise) => {
     let exercises = this.state.currentWorkout.exercises;
     exercises.push(exercise);
     this.setState(prevState => ({
@@ -74,7 +67,7 @@ class AddWorkoutForm extends React.Component {
     }));
   }
 
-  handleExerciseRemove(exercise) {
+  handleExerciseRemove = (exercise) => {
     let exercises = this.state.currentWorkout.exercises;
     exercises = exercises.filter((item) => item !== exercise );
     this.setState(prevState => ({
@@ -85,13 +78,13 @@ class AddWorkoutForm extends React.Component {
     }));
   }
 
-  handleTitleChange(title) {
+  handleTitleChange = (title) => {
     let currentWorkout = Object.assign({}, this.state.currentWorkout);
     currentWorkout.title = title;
     this.setState({currentWorkout});
   }
 
-  handleNotesChange(notes) {
+  handleNotesChange = (notes) => {
     let currentWorkout = Object.assign({}, this.state.currentWorkout);
     currentWorkout.notes = notes;
     this.setState({currentWorkout});
