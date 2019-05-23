@@ -8,7 +8,16 @@ export function addWorkout(workout) {
       dispatch({
         type: actionTypes.ADD_WORKOUT,
         workout
-      })
+      });
     }, 0);
+  }
+}
+
+export function updateCurrentWorkout(workout) {
+  return function (dispatch) {
+    dispatch({
+      type: actionTypes.UPDATE_CURRENTWORKOUT,
+      workout
+    });
   }
 }

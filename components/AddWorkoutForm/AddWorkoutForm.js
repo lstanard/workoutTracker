@@ -3,7 +3,8 @@ import { View, Text } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import {
-  addWorkout
+  addWorkout,
+  updateCurrentWorkout,
 } from '../../actions';
 import Button from '../Button/Button';
 import globalStyles from '../../assets/styles/global';
@@ -18,15 +19,6 @@ class AddWorkoutForm extends React.Component {
     super(props);
     this.state = {
       modalVisible: false,
-      currentWorkout: {
-        title: 'Name',
-        notes: '',
-        exercises: [
-          'Bench Press',
-          'Squat',
-          'Barbell Row'
-        ]
-      }
     }
   }
 
@@ -35,41 +27,39 @@ class AddWorkoutForm extends React.Component {
   }
 
   handleExerciseAdd = (exercise) => {
-    let exercises = this.state.currentWorkout.exercises;
-    exercises.push(exercise);
-    this.setState(prevState => ({
-      currentWorkout: {
-        ...prevState.currentWorkout,
-        exercises
-      }
-    }));
+    let currentWorkout = Object.assign({}, this.props.currentWorkout);
+    currentWorkout.exercises.push({
+      name: exercise,
+      sets: [{
+        weight: 0,
+        reps: 0
+      }]
+    });
+    this.props.updateCurrentWorkout(currentWorkout);
   }
 
   handleExerciseRemove = (exercise) => {
-    let exercises = this.state.currentWorkout.exercises;
-    exercises = exercises.filter((item) => item !== exercise );
-    this.setState(prevState => ({
-      currentWorkout: {
-        ...prevState.currentWorkout,
-        exercises
-      }
-    }));
+    let currentWorkout = Object.assign({}, this.props.currentWorkout);
+    currentWorkout.exercises = currentWorkout.exercises.filter((item) => {
+      return item.name !== exercise.name;
+    });
+    this.props.updateCurrentWorkout(currentWorkout);
   }
 
   handleTitleChange = (title) => {
-    let currentWorkout = Object.assign({}, this.state.currentWorkout);
+    let currentWorkout = Object.assign({}, this.props.currentWorkout);
     currentWorkout.title = title;
-    this.setState({currentWorkout});
+    this.props.updateCurrentWorkout(currentWorkout);
   }
 
   handleNotesChange = (notes) => {
-    let currentWorkout = Object.assign({}, this.state.currentWorkout);
+    let currentWorkout = Object.assign({}, this.props.currentWorkout);
     currentWorkout.notes = notes;
-    this.setState({currentWorkout});
+    this.props.updateCurrentWorkout(currentWorkout);
   }
 
   handleSubmit = () => {
-    const currentWorkout = Object.assign({}, this.state.currentWorkout);
+    const currentWorkout = Object.assign({}, this.props.currentWorkout);
     this.props.addWorkout(currentWorkout);
     this.props.navigation.goBack();
   }
@@ -88,16 +78,16 @@ class AddWorkoutForm extends React.Component {
           autoFocus={true}
           style={globalStyles.textInput}
           onChangeText={this.handleTitleChange}
-          value={this.state.currentWorkout.title} />
+          value={this.props.currentWorkout.title} />
         <TextInput
           style={globalStyles.textInput}
           onChangeText={this.handleNotesChange}
-          value={this.state.currentWorkout.notes} />
+          value={this.props.currentWorkout.notes} />
         <View style={{ marginBottom: 10 }}>
-          {this.state.currentWorkout.exercises.length > 0
+          {this.props.currentWorkout.exercises.length > 0
             ? <WorkoutExercises
                 handleRemove={this.handleExerciseRemove}
-                exercises={this.state.currentWorkout.exercises} /> 
+                exercises={this.props.currentWorkout.exercises} /> 
             : <Text style={styles.emptyWorkoutMsg}>
                 Tap "Add Exercise" to begin adding exercises for this workout.
             </Text>
@@ -120,12 +110,21 @@ class AddWorkoutForm extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  const workouts = state.workouts.workouts;
+  const currentWorkout = state.workouts.currentWorkout;
+  return { workouts, currentWorkout }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     addWorkout: (data) => {
       dispatch(addWorkout(data))
+    },
+    updateCurrentWorkout: (data) => {
+      dispatch(updateCurrentWorkout(data))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddWorkoutForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddWorkoutForm);

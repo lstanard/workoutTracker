@@ -10,7 +10,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 5
+    marginBottom: 5,
+    paddingBottom: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.medGray,
   },
   exerciseTitle: {
     fontSize: 20, 
@@ -21,7 +24,7 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: 8,
   },
   exerciseRowHeadingLabel: {
     fontWeight: 'bold',

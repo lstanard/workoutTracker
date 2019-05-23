@@ -71,7 +71,7 @@ class MyWorkouts extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { workouts } = state;
+  const { workouts } = state.workouts;
   return { workouts }
 }
 
