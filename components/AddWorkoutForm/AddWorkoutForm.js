@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import {
   addWorkout
@@ -10,30 +11,7 @@ import styles from './styles';
 import colors from '../../assets/styles/colors';
 
 import AddExerciseModal from '../AddExerciseModal/AddExerciseModal';
-import { TextInput } from 'react-native-gesture-handler';
-
-class ExerciseList extends React.Component {
-  render () {
-    return (
-      <View style={{
-        marginBottom: 15,
-        marginTop: 15,
-      }}>
-        {this.props.exercises.map((item, index) => {
-          return (
-            <View key={index} style={{marginBottom: 15}}>
-              <Text style={{fontSize: 18, fontWeight: 'bold'}}>{item}</Text>
-              <TouchableOpacity
-                onPress={() => { this.props.handleRemove(item); }}>
-                <Text style={{color: colors.brightBlue}}>Remove</Text>
-              </TouchableOpacity>
-            </View>
-          )
-        })}
-      </View>
-    )
-  }
-}
+import WorkoutExercises from '../WorkoutExercises/WorkoutExercises';
 
 class AddWorkoutForm extends React.Component {
   constructor(props) {
@@ -117,7 +95,7 @@ class AddWorkoutForm extends React.Component {
           value={this.state.currentWorkout.notes} />
         <View style={{ marginBottom: 10 }}>
           {this.state.currentWorkout.exercises.length > 0
-            ? <ExerciseList
+            ? <WorkoutExercises
                 handleRemove={this.handleExerciseRemove}
                 exercises={this.state.currentWorkout.exercises} /> 
             : <Text style={styles.emptyWorkoutMsg}>

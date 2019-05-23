@@ -20,7 +20,7 @@ export default StyleSheet.create({
     borderWidth: 0,
     borderRadius: 0,
     fontSize: 16,
-    padding: 12,
+    padding: 12, 
     height: 45,
     marginBottom: 15
   }
