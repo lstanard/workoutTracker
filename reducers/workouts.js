@@ -102,12 +102,13 @@ const initialState = {
 export default function workouts(state = initialState, action) {
   switch (action.type) {
     case actionTypes.ADD_WORKOUT:
-      return [
+      return {
         ...state,
-        {
-          ...action.workout
-        }
-      ];
+        workouts: [
+          ...state.workouts,
+          action.workout
+        ]
+      }
     case actionTypes.UPDATE_CURRENTWORKOUT:
       return {
         ...state,

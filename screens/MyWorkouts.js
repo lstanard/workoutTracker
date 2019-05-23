@@ -30,7 +30,7 @@ const WorkoutsList = (props) => {
             </Text>
             {item.exercises.map((exercise, index) => (
               <View key={index}>
-                <Text>{exercise}</Text>
+                <Text>{exercise.name}</Text>
               </View>
             ))}
           </View>
