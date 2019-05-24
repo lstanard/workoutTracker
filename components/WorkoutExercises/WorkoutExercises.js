@@ -7,6 +7,7 @@ import {
 } from '../../actions';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
+import SetRow from './SetRow';
 
 class ExerciseList extends React.Component {
   addSet = (exerciseIndex) => {
@@ -15,31 +16,16 @@ class ExerciseList extends React.Component {
     this.props.updateCurrentWorkout(currentWorkout);
   }
 
-  removeSet = (index, exerciseIndex) => {
-    let currentWorkout = Object.assign({}, this.props.currentWorkout);
-    currentWorkout.exercises[exerciseIndex].sets.splice(index, 1);
-    this.props.updateCurrentWorkout(currentWorkout);
-  }
-
   renderSets = (sets, exerciseIndex) => {
     return(
       <View>
         {sets.map((item, index) => {
           return(
-            <View key={index} style={styles.exerciseRow}>
-              <Text style={{fontWeight: 'bold', paddingHorizontal: 6}}>{index + 1}</Text>
-              <TextInput 
-                value={item.weight.toString()}
-                keyboardType="numeric"
-                style={[styles.input, styles.weight]} />
-              <TextInput 
-                value={item.reps.toString()}
-                keyboardType="numeric"
-                style={[styles.input, styles.reps]} />
-              <TouchableOpacity
-                onPress={() => { this.removeSet(index, exerciseIndex) }}>
-                <Ionicons name={`ios-remove-circle-outline`} size={25} color='#000' style={styles.icon} />
-              </TouchableOpacity>
+            <View key={index}>
+              <SetRow
+                exerciseIndex={exerciseIndex}
+                index={index}
+                item={item} />
             </View>
           )
         })}
@@ -64,7 +50,7 @@ class ExerciseList extends React.Component {
                 <Text style={styles.exerciseRowHeadingLabel}>Set</Text>
                 <Text style={styles.exerciseRowHeadingLabel}>Weight (lbs)</Text>
                 <Text style={styles.exerciseRowHeadingLabel}>Reps</Text>
-              </View>
+              </View> 
               {this.renderSets(item.sets, index)}
               <TouchableOpacity
                 style={{

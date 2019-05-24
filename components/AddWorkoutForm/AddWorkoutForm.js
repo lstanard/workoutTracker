@@ -59,7 +59,9 @@ class AddWorkoutForm extends React.Component {
   }
 
   handleSubmit = () => {
-    const currentWorkout = Object.assign({}, this.props.currentWorkout);
+    let currentWorkout = Object.assign({}, this.props.currentWorkout);
+    // TODO: Give workout a dateCreated property
+    // TODO: Clear currentWorkout from store after
     this.props.addWorkout(currentWorkout);
     this.props.navigation.goBack();
   }

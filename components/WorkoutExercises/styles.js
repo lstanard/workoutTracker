@@ -20,6 +20,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   exerciseRow: {
+    backgroundColor: colors.gray,
     alignItems: 'center',
     alignSelf: 'stretch',
     flexDirection: 'row',
@@ -34,5 +35,12 @@ export default StyleSheet.create({
     borderRadius: 3,
     paddingVertical: 8,
     paddingHorizontal: 12,
-  }
+    minWidth: 60,
+    textAlign: 'center',
+  },
+  removeSet: {
+    position: 'absolute',
+    right: 0,
+  },
+  swipedOpen: {}
 });
