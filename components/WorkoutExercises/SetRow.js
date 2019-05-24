@@ -20,7 +20,22 @@ class SetRow extends React.Component {
     }
   }
 
-  removeSet = (index, exerciseIndex) => {
+  handleWeightChange = (weight) => {
+    let { index, exerciseIndex } = this.props;
+    let currentWorkout = Object.assign({}, this.props.currentWorkout);
+    currentWorkout.exercises[exerciseIndex].sets[index].weight = weight;
+    this.props.updateCurrentWorkout(currentWorkout);
+  }
+
+  handleRepsChange = (reps) => {
+    let { index, exerciseIndex } = this.props;
+    let currentWorkout = Object.assign({}, this.props.currentWorkout);
+    currentWorkout.exercises[exerciseIndex].sets[index].reps = reps;
+    this.props.updateCurrentWorkout(currentWorkout);
+  }
+
+  removeSet = () => {
+    let { index, exerciseIndex } = this.props;
     let currentWorkout = Object.assign({}, this.props.currentWorkout);
     currentWorkout.exercises[exerciseIndex].sets.splice(index, 1);
     this.props.updateCurrentWorkout(currentWorkout);
@@ -52,7 +67,7 @@ class SetRow extends React.Component {
   }
 
   render() {
-    const { item, index, exerciseIndex } = this.props;
+    const { item, index } = this.props;
 
     const config = {
       velocityThreshold: 0.3,
@@ -66,7 +81,7 @@ class SetRow extends React.Component {
         config={config}>
         <TouchableOpacity
           style={[styles.removeSet, this.state.isSwipedOpen ? styles.swipedOpen : null]}
-          onPress={() => { this.removeSet(index, exerciseIndex) }}>
+          onPress={() => { this.removeSet() }}>
           <Ionicons name={`ios-remove-circle-outline`} size={25} color={colors.brightRed} style={styles.icon} />
         </TouchableOpacity>
         <Animated.View
@@ -79,12 +94,13 @@ class SetRow extends React.Component {
           }}>
           <View style={styles.exerciseRow}>
             <Text style={{fontWeight: 'bold', paddingHorizontal: 6}}>{index + 1}</Text>
-            {/* TODO: Add onChange handlers to these inputs / map to state */}
             <TextInput 
+              onChangeText={this.handleWeightChange}
               value={item.weight.toString()}
               keyboardType="numeric"
               style={[styles.input, styles.weight]} />
             <TextInput 
+              onChangeText={this.handleRepsChange}
               value={item.reps.toString()}
               keyboardType="numeric"
               style={[styles.input, styles.reps]} />
