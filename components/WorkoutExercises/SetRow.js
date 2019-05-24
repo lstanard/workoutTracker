@@ -7,6 +7,7 @@ import {
 } from '../../actions';
 import { Ionicons } from '@expo/vector-icons';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import colors from '../../assets/styles/colors';
 import styles from './styles';
 
 class SetRow extends React.Component {
@@ -63,8 +64,14 @@ class SetRow extends React.Component {
         onSwipeLeft={(state) => this.onSwipeLeft(state)}
         onSwipeRight={(state) => this.onSwipeRight(state)}
         config={config}>
+        <TouchableOpacity
+          style={[styles.removeSet, this.state.isSwipedOpen ? styles.swipedOpen : null]}
+          onPress={() => { this.removeSet(index, exerciseIndex) }}>
+          <Ionicons name={`ios-remove-circle-outline`} size={25} color={colors.brightRed} style={styles.icon} />
+        </TouchableOpacity>
         <Animated.View
           style={{
+            position: 'relative',
             width: this.state.width.interpolate({
               inputRange: [0, 1],
               outputRange: ['0%', '1%'],
@@ -83,13 +90,6 @@ class SetRow extends React.Component {
               style={[styles.input, styles.reps]} />
           </View>
         </Animated.View>
-        {this.state.isSwipedOpen && 
-          <TouchableOpacity
-            style={[styles.removeSet, this.state.isSwipedOpen ? styles.swipedOpen : null]}
-            onPress={() => { this.removeSet(index, exerciseIndex) }}>
-            <Ionicons name={`ios-remove-circle-outline`} size={25} color='#000' style={styles.icon} />
-          </TouchableOpacity>
-        }
       </GestureRecognizer>
     )
   }

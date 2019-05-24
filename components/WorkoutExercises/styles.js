@@ -41,6 +41,6 @@ export default StyleSheet.create({
   removeSet: {
     position: 'absolute',
     right: 0,
+    top: 3,
   },
-  swipedOpen: {}
 });
