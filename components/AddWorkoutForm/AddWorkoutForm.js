@@ -14,6 +14,12 @@ import colors from '../../assets/styles/colors';
 import AddExerciseModal from '../AddExerciseModal/AddExerciseModal';
 import WorkoutExercises from '../WorkoutExercises/WorkoutExercises';
 
+const emptyWorkout = {
+  title: '',
+  notes: '',
+  exercises: []
+}
+
 class AddWorkoutForm extends React.Component {
   constructor(props) {
     super(props);
@@ -61,8 +67,7 @@ class AddWorkoutForm extends React.Component {
   handleSubmit = () => {
     let currentWorkout = Object.assign({}, this.props.currentWorkout);
     // TODO: Give workout a dateCreated property
-    // TODO: Clear currentWorkout from store after
-    this.props.addWorkout(currentWorkout);
+    this.props.addWorkout(currentWorkout, this.props.updateCurrentWorkout(emptyWorkout));
     this.props.navigation.goBack();
   }
 
@@ -86,7 +91,7 @@ class AddWorkoutForm extends React.Component {
           onChangeText={this.handleNotesChange}
           value={this.props.currentWorkout.notes} />
         <View style={{ marginBottom: 10 }}>
-          {this.props.currentWorkout.exercises.length > 0
+          {this.props.currentWorkout.exercises && this.props.currentWorkout.exercises.length > 0
             ? <WorkoutExercises
                 handleRemove={this.handleExerciseRemove}
                 exercises={this.props.currentWorkout.exercises} /> 
@@ -120,8 +125,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addWorkout: (data) => {
-      dispatch(addWorkout(data))
+    addWorkout: (data, callback) => {
+      dispatch(addWorkout(data)).then(() => {
+        if (callback) callback();
+      });
     },
     updateCurrentWorkout: (data) => {
       dispatch(updateCurrentWorkout(data))

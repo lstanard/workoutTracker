@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import globalStyles from '../assets/styles/global';
 import Button from '../components/Button/Button';
@@ -8,7 +8,7 @@ import colors from '../assets/styles/colors';
 
 const WorkoutsList = (props) => {
   return (
-    <View style={{
+    <ScrollView style={{
       alignSelf: 'stretch',
       marginTop: 30}}>
       <View style={{
@@ -36,7 +36,7 @@ const WorkoutsList = (props) => {
           </View>
         </TouchableOpacity>
       ))}
-    </View>
+    </ScrollView>
   )
 }
 
