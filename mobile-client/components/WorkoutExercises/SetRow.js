@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import {
   updateCurrentWorkout,
-} from '../../actions';
+} from '../../actions/workouts';
 import { Ionicons } from '@expo/vector-icons';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import colors from '../../assets/styles/colors';

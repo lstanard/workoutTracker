@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import {
   updateCurrentWorkout,
-} from '../../actions';
+} from '../../actions/workouts.js';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import SetRow from './SetRow';

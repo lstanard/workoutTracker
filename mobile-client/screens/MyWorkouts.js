@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchWorkouts } from '../actions';
+import { fetchWorkouts } from '../actions/workouts.js';
 import globalStyles from '../assets/styles/global';
 import Button from '../components/Button/Button';
 import styles from '../assets/styles/screens/MyWorkouts';

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
   addWorkout,
   updateCurrentWorkout,
-} from '../../actions';
+} from '../../actions/workouts.js';
 import Button from '../Button/Button';
 import globalStyles from '../../assets/styles/global';
 import styles from './styles';
