@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "**/.expo": true,
+    "**/.vscode": true,
+    "**/node_modules": true
+  }
+}
