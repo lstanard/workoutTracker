@@ -1,4 +1,5 @@
 import React from 'react';
+import { registerRootComponent } from 'expo';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux';
@@ -16,7 +17,7 @@ const store = createStore(
   )
 );
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
@@ -25,3 +26,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+registerRootComponent(App);

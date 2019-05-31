@@ -3,14 +3,17 @@ Mobile application and API for tracking workouts.
 
 ## Development
 
-Uses yarn workspaces. This command will install dependencies in both the `mobile-client` and `server` directories.
-
 ```
 yarn install
+yarn start
 ```
+
+_Yarn start will prompt you to install Expo CLI_
 
 ### If you do not have yarn
 
 ```
 brew install yarn
 ```
+
+### Getting simulators to work
