@@ -1,5 +1,21 @@
 export default {
-  exercises: [],
+  exercises: [
+    {
+      id: 1,
+      name: 'Bench Press',
+      description: 'Lay flat on the bench, lower weight to chest and push back up'
+    },
+    {
+      id: 2,
+      name: 'Squat',
+      description: 'Put the bar on your back and sit back'
+    },
+    {
+      id: 3,
+      name: 'Deadlift',
+      description: 'Approach the bar, bend over, pick it up'
+    }
+  ],
   workouts: [
     {
       title: 'StrongLifts 5x5 A',

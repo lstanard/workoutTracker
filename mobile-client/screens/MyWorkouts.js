@@ -7,7 +7,7 @@ import Button from '../components/Button/Button';
 import styles from '../assets/styles/screens/MyWorkouts';
 import colors from '../assets/styles/colors';
 
-const WorkoutsList = (props) => {
+const WorkoutsList = ({ workouts }) => {
   return (
     <ScrollView style={{
       alignSelf: 'stretch',
@@ -22,7 +22,7 @@ const WorkoutsList = (props) => {
           Recent Workouts
         </Text>
       </View>
-      {props.workouts.map((item, index) => (
+      {workouts.map((item, index) => (
         <TouchableOpacity key={index}>
           <View 
             style={styles.workoutCard}>
@@ -58,6 +58,7 @@ class MyWorkouts extends React.Component {
       ...globalStyles.container,
       ...styles.container,
     };
+    const { navigation, workouts } = this.props;
 
     return (
       <View style={containerStyles}>
@@ -67,10 +68,10 @@ class MyWorkouts extends React.Component {
           My Workouts
         </Text>
         <Button 
-          action={() => this.props.navigation.navigate('AddWorkout')}
+          action={() => navigation.navigate('AddWorkout')}
           label="Start Workout" />
         <WorkoutsList
-          workouts={this.props.workouts} />
+          workouts={workouts} />
       </View>
     );
   }
