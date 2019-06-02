@@ -1,18 +1,17 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import {
   addWorkout,
   updateCurrentWorkout,
 } from '../../actions/workouts.js';
 import Button from '../Button/Button';
-import globalStyles from '../../assets/styles/global';
 import styles from './styles';
 import colors from '../../assets/styles/colors';
 
 import AddExerciseModal from '../AddExerciseModal/AddExerciseModal';
 import WorkoutExercises from '../WorkoutExercises/WorkoutExercises';
+import FormHeader from './FormHeader';
 
 const emptyWorkout = {
   title: '',
@@ -52,16 +51,11 @@ class AddWorkoutForm extends React.Component {
     this.props.updateCurrentWorkout(currentWorkout);
   }
 
-  handleTitleChange = (title) => {
+  handleFormHeaderChange = (property, text) => {
+    const { updateCurrentWorkout } = this.props;
     let currentWorkout = Object.assign({}, this.props.currentWorkout);
-    currentWorkout.title = title;
-    this.props.updateCurrentWorkout(currentWorkout);
-  }
-
-  handleNotesChange = (notes) => {
-    let currentWorkout = Object.assign({}, this.props.currentWorkout);
-    currentWorkout.notes = notes;
-    this.props.updateCurrentWorkout(currentWorkout);
+    currentWorkout[property] = text;
+    updateCurrentWorkout(currentWorkout);
   }
 
   handleSubmit = () => {
@@ -76,25 +70,21 @@ class AddWorkoutForm extends React.Component {
   }
 
   render() {
+    const { currentWorkout } = this.props;
+
     return (
       <View style={{
         padding: 30, 
         paddingTop: 0, 
         alignSelf: 'stretch' }}>
-        <TextInput
-          autoFocus={true}
-          style={globalStyles.textInput}
-          onChangeText={this.handleTitleChange}
-          value={this.props.currentWorkout.title} />
-        <TextInput
-          style={globalStyles.textInput}
-          onChangeText={this.handleNotesChange}
-          value={this.props.currentWorkout.notes} />
+        <FormHeader 
+          handleChange={this.handleFormHeaderChange}
+          currentWorkout={currentWorkout} />
         <View style={{ marginBottom: 10 }}>
-          {this.props.currentWorkout.exercises && this.props.currentWorkout.exercises.length > 0
+          {currentWorkout.exercises && currentWorkout.exercises.length > 0
             ? <WorkoutExercises
                 handleRemove={this.handleExerciseRemove}
-                exercises={this.props.currentWorkout.exercises} /> 
+                exercises={currentWorkout.exercises} /> 
             : <Text style={styles.emptyWorkoutMsg}>
                 Tap "Add Exercise" to begin adding exercises for this workout.
             </Text>
